@@ -1,0 +1,24 @@
+{
+  "expr" : true,
+
+  "latedef": "nofunc",
+
+  "newcap": true,
+
+  "quotmark": true,
+
+  "undef": true,
+
+  "eqnull": true,
+
+  "sub": true,
+
+  "eqeqeq": false,
+
+  "browser": true,
+  "jquery": true,
+  "node": true,
+  "devel": true,
+
+  "predef": []
+}
