@@ -7,29 +7,58 @@
 (function(exports) {
   'use strict';
 
+  // Privata methods -------------------
+  var isNumber = function(n) {
+    if (typeof n !== 'number' && typeof n !== 'string') {
+      return false;
+    } else {
+      return (n === parseFloat(n) && isFinite(n));
+    } 
+  };
+
+
+
   var TsumikiLogo = (function() {
 
-    // Default Color List
-    var defaultColorList = {
-      green: '#23AAA4',
-      rGreen: '#5AB5B0',
-      lGreen: '#78BEB2',
-      purple: '#686F89',
-      rRed: '#DC5D54',
-      lRed: '#DD6664',
-      red: '#D94142',
-      rOrange: '#E78E21',
-      lOrange: '#E9A21F',
-      yellow: '#EDB51C'
-    };
+    var defaults = {
+      size: 64,
 
-    return function(canvas, colorList) {
+      colorList: {
+        green: '#23AAA4',
+        rGreen: '#5AB5B0',
+        lGreen: '#78BEB2',
+        purple: '#686F89',
+        rRed: '#DC5D54',
+        lRed: '#DD6664',
+        red: '#D94142',
+        rOrange: '#E78E21',
+        lOrange: '#E9A21F',
+        yellow: '#EDB51C'
+      }
+    },
+
+    // Screen resolution
+    ratio = 1;
+
+    return function(canvas, opt) {
       this.canvas = canvas;
 
-      if (colorList) {
-        this.colorList = colorList;
+      if (opt && opt.isRetinaDisplay === true) {
+        this.isRetinaDisplay = opt.isRetinaDisplay;
+
+        ratio = 2;
+      }
+
+      if (opt && opt.size && isNumber(opt.size)) {
+        this.size = opt.size * ratio;
       } else {
-        this.colorList = defaultColorList;
+        this.size = defaults.size * ratio;
+      }
+
+      if (opt && opt.colorList) {
+        this.colorList = opt.colorList;
+      } else {
+        this.colorList = defaults.colorList;
       }
 
     };
@@ -39,17 +68,33 @@
   TsumikiLogo.prototype = {
 
     sizing: function(size) {
+      if (size && isNumber(size)) {
 
-      this.size = size;
+        this.canvas.width = size * 8;
+        this.canvas.height = size * 8;
 
-      this.canvas.width = size * 8;
-      this.canvas.style.width = (size * 4) + 'px';
+        if (this.isRetinaDisplay) {
+          this.size = size * 2;
 
-      this.canvas.height = size * 8;
-      this.canvas.style.height = (size * 4) + 'px';
+          this.canvas.style.width = (size * 4) + 'px';
+          this.canvas.style.height = (size * 4) + 'px';
+
+        } else {
+          this.size = size;
+        }
+
+      }
 
       return this;
-    },
+    },// sizing ------------------------
+
+    coloring: function(colorList) {
+      if (colorList) {
+        this.colorList = colorList;
+      }
+
+      return this;
+    },// coloring ----------------------
 
     draw: function() {
       var ctx = this.canvas.getContext('2d'),
@@ -63,6 +108,8 @@
             [size, 0],
             [-size, size]
           ];
+
+      this.sizing(this.size);
 
       ctx.scale(2, 1);
 
@@ -87,7 +134,7 @@
 
       }
 
-    }
+    }// draw ---------------------------
 
   };
 

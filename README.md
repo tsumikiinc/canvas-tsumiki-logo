@@ -2,7 +2,7 @@
 
 [http://www.tsumikiinc.com/](http://www.tsumikiinc.com/)
 
-v0.1.0
+v0.2.0
 
 ## Demo
 
@@ -10,10 +10,10 @@ v0.1.0
 
 ## Usage
 
-### Load library
+### Load this library
 
 ```html
-<script src="canvas-tsumiki-logo.js"></script>
+<script src="canvas-tsumiki-logo.min.js"></script>
 ```
 
 ### Markup
@@ -28,26 +28,104 @@ v0.1.0
 var cvs = document.getElementById('tsumikiLogo');
 var ctx = new TsumikiLogo(cvs);
 
-ctx.sizing(128);
 ctx.draw();
+```
+
+## Create object
+
+```javascript
+var cvs = document.getElementById('tsumikiLogo');
+var ctx = new TsumikiLogo(cvs);
+```
+
+### Parameter
+
+**`TsumikiLogo(DOMElement [, option]);`**
+
+**DOMElement**
+
+Target element
+
+Type: *Element*
+
+**option**
+
+Options 
+
+Type: *Object*
+
+---
+
+#### `option.size`
+
+Size
+
+#### `option.colorList`
+
+Color list
+
+#### `option.isRetinaDisplay`
+
+Will support the Retina display
+
+```javascript
+var cvs = document.getElementById('tsumikiLogo'),
+    cList = {
+      blue: 'blue',
+      rBlue: 'Aqua',
+      lBlue: 'CornflowerBlue',
+      Coral: 'Coral',
+      rRed: '#b22222',
+      lRed: '#ff00ff',
+      Brown: 'Brown',
+      rG: 'DarkGreen',
+      lG: '#bdb76b',
+      magenta: '#8b008b'
+    };
+
+var ctx = new TsumikiLogo(cvs, {
+  size: 32,
+  colorList: cList,
+  isRetinaDisplay: true
+});
 ```
 
 ## Methods
 
-### `sizing()`
+### `.sizing( size )`
 
 Specifies the size
 
-### `draw()`
+**size**
 
-Drawing
+Type: *Number*
 
-## Option
+**Returns:** `this`
+
+### `.coloring( colorList )`
 
 Custom color list
 
+**colorList**
+
+Type: *Object*
+
+**Returns:** `this`
+
+### `.draw()`
+
+Drawing
+
+## Example
+
+Use methods
+
 ```javascript
-var colorList = {
+var cvs = document.getElementById('tsumikiLogo');
+var ctx = new TsumikiLogo(cvs);
+
+ctx.sizing(96);
+ctx.coloring({
   blue: 'blue',
   rBlue: 'Aqua',
   lBlue: 'CornflowerBlue',
@@ -58,10 +136,30 @@ var colorList = {
   rG: 'DarkGreen',
   lG: '#bdb76b',
   magenta: '#8b008b'
-}
+});
+ctx.draw();
+```
 
+Method chain
+
+```javascript
 var cvs = document.getElementById('tsumikiLogo');
-var ctx = new TsumikiLogo(cvs, colorList);
+var ctx = new TsumikiLogo(cvs);
+
+var colors = {
+  blue: 'blue',
+  rBlue: 'Aqua',
+  lBlue: 'CornflowerBlue',
+  Coral: 'Coral',
+  rRed: '#b22222',
+  lRed: '#ff00ff',
+  Brown: 'Brown',
+  rG: 'DarkGreen',
+  lG: '#bdb76b',
+  magenta: '#8b008b'
+};
+
+ctx.sizing(32).coloring(colors).draw();
 ```
 
 ## Support
