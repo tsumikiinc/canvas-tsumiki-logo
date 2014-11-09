@@ -2,164 +2,109 @@
 
 [http://www.tsumikiinc.com/](http://www.tsumikiinc.com/)
 
-v0.2.0
-
 ## Demo
 
 [https://tsumikiinc.github.io/canvas-tsumiki-logo/demo/](https://tsumikiinc.github.io/canvas-tsumiki-logo/demo/)
 
 ## Usage
 
-### Load this library
-
-```html
-<script src="canvas-tsumiki-logo.min.js"></script>
-```
-
-### Markup
-
-```html
-<canvas id="tsumikiLogo"></canvas>
-```
-
-### js
-
 ```javascript
-var cvs = document.getElementById('tsumikiLogo');
+var cvs = document.getElementById('canvas');
 var ctx = new TsumikiLogo(cvs);
-
-ctx.draw();
+ctx.update();
 ```
 
-## Create object
+### Config
 
-```javascript
-var cvs = document.getElementById('tsumikiLogo');
-var ctx = new TsumikiLogo(cvs);
-```
+**`TsumikiLogo(CanvasElement [, options ]);`**
 
-### Parameter
+#### options.size
 
-**`TsumikiLogo(DOMElement [, option]);`**
-
-**DOMElement**
-
-Target element
-
-Type: *Element*
-
-**option**
-
-Options 
-
-Type: *Object*
-
----
-
-#### `option.size`
-
-Size
-
-#### `option.colorList`
-
-Color list
-
-#### `option.isRetinaDisplay`
-
-Will support the Retina display
-
-```javascript
-var cvs = document.getElementById('tsumikiLogo'),
-    cList = {
-      blue: 'blue',
-      rBlue: 'Aqua',
-      lBlue: 'CornflowerBlue',
-      Coral: 'Coral',
-      rRed: '#b22222',
-      lRed: '#ff00ff',
-      Brown: 'Brown',
-      rG: 'DarkGreen',
-      lG: '#bdb76b',
-      magenta: '#8b008b'
-    };
-
-var ctx = new TsumikiLogo(cvs, {
-  size: 32,
-  colorList: cList,
-  isRetinaDisplay: true
-});
-```
-
-## Methods
-
-### `.sizing( size )`
-
-Specifies the size
-
-**size**
+size
 
 Type: *Number*
 
-**Returns:** `this`
+Default: `256`
 
-### `.coloring( colorList )`
+#### options.fill
 
-Custom color list
+color
 
-**colorList**
+Type: *Array*
 
-Type: *Object*
-
-**Returns:** `this`
-
-### `.draw()`
-
-Drawing
-
-## Example
-
-Use methods
+Default:
 
 ```javascript
-var cvs = document.getElementById('tsumikiLogo');
-var ctx = new TsumikiLogo(cvs);
-
-ctx.sizing(96);
-ctx.coloring({
-  blue: 'blue',
-  rBlue: 'Aqua',
-  lBlue: 'CornflowerBlue',
-  Coral: 'Coral',
-  rRed: '#b22222',
-  lRed: '#ff00ff',
-  Brown: 'Brown',
-  rG: 'DarkGreen',
-  lG: '#bdb76b',
-  magenta: '#8b008b'
-});
-ctx.draw();
+[
+  '#23AAA4',
+  '#5AB5B0',
+  '#78BEB2',
+  '#686F89',
+  '#DC5D54',
+  '#DD6664',
+  '#D94142',
+  '#E78E21',
+  '#E9A21F',
+  '#EDB51C'
+]
 ```
 
-Method chain
+#### options.fill
 
-```javascript
-var cvs = document.getElementById('tsumikiLogo');
-var ctx = new TsumikiLogo(cvs);
+is fill
 
-var colors = {
-  blue: 'blue',
-  rBlue: 'Aqua',
-  lBlue: 'CornflowerBlue',
-  Coral: 'Coral',
-  rRed: '#b22222',
-  lRed: '#ff00ff',
-  Brown: 'Brown',
-  rG: 'DarkGreen',
-  lG: '#bdb76b',
-  magenta: '#8b008b'
-};
+Type: *Bool*
 
-ctx.sizing(32).coloring(colors).draw();
+Default: `true`
+
+#### options.lineWidth
+
+Stroke
+
+Type: *Number*
+
+Default: `0`
+
+#### options.lineColor
+
+Stroke style
+
+Type: *String*
+
+Default: `#333`
+
+#### options.ratio
+
+Screen resolution
+
+Type: *Number*
+
+Default: `1`
+
+### Methods
+
+#### `.update()`
+
+Draw
+
+**Returns:** `this`
+
+#### `.setSize( Number )`
+
+Set size
+
+**Returns:** `this`
+
+## Contributing
+
+This library was developed with following things
+
+[gulp](http://gulpjs.com/)
+
+[CoffeeScript](http://coffeescript.org/)
+
+```shell
+npm i
 ```
 
 ## Support

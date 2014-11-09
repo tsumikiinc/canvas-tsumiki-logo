@@ -1,22 +1,24 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
   <meta charset="utf-8">
   <title>Canvas Tsumiki Logo</title>
-  <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-
-  <canvas id="tsumikiLogo"></canvas>
-
-  <script src="canvas-tsumiki-logo.js"></script>
+  <canvas id="tsumikiLogoFill"></canvas>
+  <canvas id="tsumikiLogoStroke"></canvas>
+  <script src="../dest/canvas-tsumiki-logo.js"></script>
   <script>
     (function() {
-      var cvs = document.getElementById('tsumikiLogo');
-      var ctx = new TsumikiLogo(cvs);
+      var tsumikiLogoFill = document.getElementById('tsumikiLogoFill');
+      var ctx1 = new TsumikiLogo(tsumikiLogoFill, {ratio: 2});
 
-      ctx.draw();
+      var tsumikiLogoStroke = document.getElementById('tsumikiLogoStroke');
+      var ctx2 = new TsumikiLogo(tsumikiLogoStroke, {ratio: 2, fill: false, lineWidth: 1});
+
+      ctx1.update();
+      ctx2.update();
 
     })();
   </script>
